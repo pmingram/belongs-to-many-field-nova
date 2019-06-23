@@ -49,8 +49,8 @@ class BelongsToManyField extends Field
     {
         $requestValue = strlen($request[$requestAttribute]) > 2 ? json_decode($request[$requestAttribute]) : [];
         $class = get_class($model);
-        $class::saved(function ($model) use ($requestValue, $attribute) {
-            $model->syncManyValues($requestValue, $attribute, $this->relationModel);
+        $class::saved(function ($model) use ($requestValue, $attribute, $class) {
+            $model->syncManyValues($requestValue, $attribute, $this->relationModel, $class);
         });
     }
     
