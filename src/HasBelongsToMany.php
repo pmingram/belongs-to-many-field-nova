@@ -19,9 +19,19 @@ trait HasBelongsToMany
         return $this->belongsToMany($model);
     }
 	
-	public function syncManyValues($values, $attribute, $relationModel)
+	public function syncManyValues($values, $attribute, $relationModel, $class = null)
 	{
 		$arrayIds = array_column($values, 'id');
-		$this->$attribute()->sync($arrayIds);
+		$items = [];
+
+		if ($class !== null) {
+            foreach ($arrayIds as $item) {
+                $items[$item] = ['taggable_type' => $class];
+            }
+
+            $this->$attribute()->sync($items);
+        } else {
+            $this->$attribute()->sync($arrayIds);
+        }
 	}
 }
