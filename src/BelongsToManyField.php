@@ -18,6 +18,7 @@ class BelongsToManyField extends Field
     public $component = 'BelongsToManyField';
     
     public $relationModel;
+    public $classColumn;
 
     /**
      * Create a new field.
@@ -28,9 +29,11 @@ class BelongsToManyField extends Field
      * @return void
      */
     //Code by @drsdre
-    public function __construct($name, $attribute = null, $resource = null)
+    public function __construct($name, $attribute = null, $resource = null, $classColumn = null)
     {
         parent::__construct($name, $attribute);
+        
+        $this->classColumn = $classColumn;
     }
 
     public function options($options)
@@ -50,7 +53,7 @@ class BelongsToManyField extends Field
         $requestValue = strlen($request[$requestAttribute]) > 2 ? json_decode($request[$requestAttribute]) : [];
         $class = get_class($model);
         $class::saved(function ($model) use ($requestValue, $attribute, $class) {
-            $model->syncManyValues($requestValue, $attribute, $this->relationModel, $class);
+            $model->syncManyValues($requestValue, $attribute, $this->relationModel, $class, $this->classColumn);    
         });
     }
     
