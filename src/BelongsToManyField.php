@@ -3,6 +3,7 @@
 namespace Benjacho\BelongsToManyField;
 
 use Laravel\Nova\Fields\Field;
+use Laravel\Nova\Fields\ResourceRelationshipGuesser;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Benjacho\BelongsToManyField\Rules\ArrayRules;
 
