@@ -814,6 +814,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 
 
@@ -826,10 +828,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     components: {
         MultiSelect: __WEBPACK_IMPORTED_MODULE_1_vue_multiselect___default.a
     },
-
     data: function data() {
         return {
-            options: []
+            options: [],
+            optionsLabel: "name"
         };
     },
 
@@ -840,6 +842,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
          */
         setInitialValue: function setInitialValue() {
             this.options = this.field.options;
+            this.optionsLabel = this.field.optionsLabel ? this.field.optionsLabel : 'name';
             this.value = this.field.value || '';
         },
 
@@ -11106,30 +11109,32 @@ var render = function() {
     "default-field",
     { attrs: { field: _vm.field, errors: _vm.errors } },
     [
-      _c(
-        "template",
-        { slot: "field" },
-        [
-          _c("multi-select", {
-            class: _vm.errorClasses,
-            attrs: {
-              options: _vm.options,
-              multiple: true,
-              label: "name",
-              "track-by": "name",
-              placeholder: _vm.field.name
-            },
-            model: {
-              value: _vm.value,
-              callback: function($$v) {
-                _vm.value = $$v
+      _c("template", { slot: "field" }, [
+        _c(
+          "div",
+          { style: { height: _vm.field.height ? _vm.field.height : "auto" } },
+          [
+            _c("multi-select", {
+              class: _vm.errorClasses,
+              attrs: {
+                options: _vm.options,
+                multiple: true,
+                label: _vm.optionsLabel,
+                "track-by": _vm.optionsLabel,
+                placeholder: _vm.field.name
               },
-              expression: "value"
-            }
-          })
-        ],
-        1
-      )
+              model: {
+                value: _vm.value,
+                callback: function($$v) {
+                  _vm.value = $$v
+                },
+                expression: "value"
+              }
+            })
+          ],
+          1
+        )
+      ])
     ],
     2
   )
